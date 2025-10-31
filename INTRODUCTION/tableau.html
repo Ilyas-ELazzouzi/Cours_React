@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liste d'étudiants avec map</title>
+   
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React et ReactDOM via CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      
+       const name = "iPhone 15"
+       const price = 1000
+       const description = "Apple iPhone 15"
+       const image = "https://www.apple.com/fr/iphone-15/images/overview/hero/hero_large_2x.jpg"
+       const inStock = true
+
+     function ProductCard(props) {
+       const {name, price, description, image, inStock} = props
+        return (
+          <div>
+            {inStock ? <p>En stock</p> : <p>Rupture de stock</p>}
+            <img src={image} alt={name} />
+            <h1>{name}</h1>
+            <p>{price}</p>
+            <p>{description}</p>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div>
+            <ProductCard name={name} price={price} description={description} image={image} inStock={inStock} />
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"))
+      root.render(<App />)
+    </script>
+  </body>
+</html>

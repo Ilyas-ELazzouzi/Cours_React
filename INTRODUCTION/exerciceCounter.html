@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercice Counter - useEffect dépendant</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useEffect, useRef, useState } = React
+
+    function App() {
+      const [isActive, setIsActive] = useState(false)
+      const [counter, setCounter] = useState(0)
+      const isFirstRunRef = useRef(true)
+
+      useEffect(() => {
+        if (isFirstRunRef.current) {
+          isFirstRunRef.current = false
+          return;
+        }
+        setCounter((prev) => prev + 1)
+      }, [isActive]);
+
+      return (
+        <div>
+          <h1>Exercice Counter</h1>
+          <button onClick={() => setIsActive((prev) => !prev)}>
+            {isActive ? 'Désactiver' : 'Activer'}
+          </button>
+          <p>isActive: {String(isActive)}</p>
+          <p>Nombre : {counter}</p>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
+
+
