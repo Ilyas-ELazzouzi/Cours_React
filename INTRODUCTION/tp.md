@@ -94,7 +94,7 @@ Voici un code que vous devez **analyser et expliquer**, en vous appuyant sur le 
   Il affiche des messages dans la console pour montrer quand le composant Counter est monté, mis à jour ou démonté
 
    * Quand la fonction de nettoyage est-elle appelée ?
-  Avant le prochain appel de useEffect et quand l'élément est retiré du DOM (démonté (STARFOULAH))
+  Avant le prochain appel de useEffect et quand l'élément est retiré du DOM (démonté)
 
    * Que se passe-t-il quand on clique sur "Changer le statut" ?
   Si status était true il devient false donc Counter n’est plus affiché et l'inverse si au départ il était false
