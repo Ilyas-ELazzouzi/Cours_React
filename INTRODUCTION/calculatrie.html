@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercice Counter - useEffect dépendant</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function calculatriceReducer(state, action) {
+        const toNumber = (val) => parseFloat(val) || 0
+        switch(action.type){
+         case "set_A":
+            return { ...state, a: action.value }
+          case "set_B":
+            return { ...state, b: action.value }
+          case "addition":
+            return { ...state, result: toNumber(state.a) + toNumber(state.b) }
+          case"substraction":
+            return { ...state, result: toNumber(state.a) - toNumber(state.b)}
+          case"multiplication":
+            return { ...state, result: toNumber(state.a) * toNumber(state.b)}
+          case"division":
+            if (toNumber(state.b) === 0) {
+            return { ...state, result: "Erreur : division par zéro" }}
+            return { ...state, result: toNumber(state.a) / toNumber(state.b) };
+
+          default:
+            return state
+    }
+}
+
+    function Calculatrice() {
+        const [state, dispatch] = React.useReducer(calculatriceReducer, {
+            a: "",
+            b: "",
+            result: null,
+        })
+
+     return (
+        <div>
+            <h2>Maths Halal</h2>
+            <input
+              type="number"
+              value={state.a} 
+              onChange={(e) =>
+                dispatch({ type: "set_A", value: e.target.value })
+              }
+              placeholder="Numero 1"
+            />
+
+            <input
+            type="number" 
+            value={state.b}
+            onChange={(e) =>
+                dispatch(({type: "set_B", value: e.target.value}))
+            }
+            placeholder ="Numero 2"
+            />
+            
+            <div>
+                <button onClick={() => dispatch({ type: "addition" })}>+</button>
+                <button onClick={() => dispatch({ type: "substraction" })}>-</button>
+                <button onClick={() => dispatch({ type: "multiplication" })}>*</button>
+                <button onClick={() => dispatch({ type: "division" })}>/</button>
+            </div>
+
+            <h3>
+                Résultat : {state.result !== null ? state.result : "—"}
+            </h3>
+
+          </div>
+        
+        )}
+
+   const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<Calculatrice />)
+  </script>
+</body>
+</html>
+
+
